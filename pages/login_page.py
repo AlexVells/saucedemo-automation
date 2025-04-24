@@ -16,9 +16,6 @@ class LoginPage:
     def is_element_visible(self, selector: str):
         return self.page.is_visible(selector)
 
-    def username_input_is_visible(self):
-        is_visible = self.page.is_visible(self.username_input)
-
     def enter_username(self, username: str):
         self.page.fill(self.username_input, username)
 
