@@ -35,23 +35,19 @@ jobs:
           name: allure-results
           path: allure-results/
 
-      - name: Load test report history
-        if: always()
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: gh-pages
-        continue-on-error: true
-
       - name: Build Allure report
         if: always()
         uses: simple-elf/allure-report-action@master
         id: allure-report
         with:
           allure_results: allure-results
-          gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
+
+      - name: Debug allure-history contents
+        if: always()
+        run: |
+          ls -la allure-history || echo "allure-history directory is empty or does not exist"
 
       - name: Publish Allure report to GitHub Pages
         if: always()
